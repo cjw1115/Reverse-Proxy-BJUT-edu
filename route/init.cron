@@ -1,0 +1,3 @@
+00 00 * * * sh /home/cjw1115/route/reboot.sh
+05 00 * * * sh /home/cjw1115/nginx/spilt.sh
+

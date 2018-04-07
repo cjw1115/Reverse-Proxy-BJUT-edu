@@ -1,0 +1,23 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+/usr/bin/vpnd 2>&1
+/usr/bin/vpnd 2>&1
+
+sh /home/cjw1115/route/connect.sh #connect to vpn.bjut.edu.cn
+sleep 4s                            #just wait for connecting to vpn.bjut.edu.cn successfully .
+sh /home/cjw1115/route/route_add.sh >> /home/cjw1115/route/log_add.txt #change the route table,let all of address belong to 172.0.0.0 use ssl-vpn channel.
+sleep 4s
+./usr/sbin/nginx  #launch nginx server,for reverse proxy the website gdjwgl.bjut.edu.cn(which ip address is 172.xx.xx.xx in internal network of BJUT.)
+./usr/sbin/nginx -s reload #reload nginx server make sure that there is nothing wrong with our action.
+exit 0
